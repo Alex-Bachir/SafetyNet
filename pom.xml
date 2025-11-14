@@ -28,7 +28,6 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
-		<log4j2.version>2.21.1</log4j2.version>
 		<jacoco.version>0.8.11</jacoco.version>
 	</properties>
 	<dependencies>
@@ -36,22 +35,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<!-- Exclure Logback pour utiliser Log4j2 -->
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-logging</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
-		<!-- Log4j2 -->
+		<!-- Jakarta Annotation API -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-log4j2</artifactId>
+			<groupId>jakarta.annotation</groupId>
+			<artifactId>jakarta.annotation-api</artifactId>
 		</dependency>
 
 		<dependency>
@@ -59,14 +52,7 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
-		<!-- Jakarta Annotation API pour @PostConstruct -->
-		<dependency>
-			<groupId>jakarta.annotation</groupId>
-			<artifactId>jakarta.annotation-api</artifactId>
-		</dependency>
 
-		<!-- JUnit 5 (déjà inclus dans spring-boot-starter-test) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
