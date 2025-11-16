@@ -2,6 +2,7 @@ package com.example.SafetyNet.controler;
 
 import com.example.SafetyNet.model.Person;
 import com.example.SafetyNet.service.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
