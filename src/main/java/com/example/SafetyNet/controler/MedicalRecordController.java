@@ -30,7 +30,7 @@ public class MedicalRecordController {
     @GetMapping("/{firstName}/{lastName}")
     public ResponseEntity<MedicalRecord> getMedicalRecordByName(
             @PathVariable String firstName,
-            @PathVariable String lastName) {  // ← Seulement 2 paramètres, PAS de @RequestBody !
+            @PathVariable String lastName) {
 
         log.info("Requête GET reçue pour {} {}", firstName, lastName);
         Optional<MedicalRecord> medicalRecord = medicalRecordService.findByName(firstName, lastName);
@@ -49,9 +49,9 @@ public class MedicalRecordController {
         log.info("Requête PUT reçue pour mettre à jour {} {}", firstName, lastName);
 
         Optional<MedicalRecord> updated = medicalRecordService.updateMedicalRecord(
-                firstName,      // ← Depuis l'URL
-                lastName,       // ← Depuis l'URL
-                updatedRecord   // ← Depuis le JSON
+                firstName,
+                lastName,
+                updatedRecord
         );
 
         return updated
