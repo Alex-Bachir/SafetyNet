@@ -51,7 +51,8 @@ public class PersonService {
                 });
 
         persons.add(person);
-//        dataLoaderService.saveData();
+
+        dataLoaderService.saveData();
 
         return person;
     }
@@ -71,6 +72,8 @@ public class PersonService {
         person.setPhone(updatetedPerson.getPhone());
         person.setEmail(updatetedPerson.getEmail());
 
+        dataLoaderService.saveData();
+
         return person;
     }
 
@@ -83,6 +86,7 @@ public class PersonService {
                 .removeIf(p -> p.getFirstName().equalsIgnoreCase(firstName)
                         && p.getLastName().equalsIgnoreCase(lastName));
 
+        dataLoaderService.saveData();
 
         return removed;
     }

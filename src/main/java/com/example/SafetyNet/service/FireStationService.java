@@ -56,6 +56,9 @@ public class FireStationService {
                 });
 
         fireStations.add(fireStation);
+
+        dataLoaderService.saveData();
+
         return fireStation;
 
     }
@@ -70,6 +73,8 @@ public class FireStationService {
         fireStation.setAddress(updatedFireStation.getAddress());
         fireStation.setStation(updatedFireStation.getStation());
 
+        dataLoaderService.saveData();
+
         return fireStation;
     }
 
@@ -81,8 +86,10 @@ public class FireStationService {
                         && f.getStation().equals(station));
 
         if (removed) {
-//            dataLoaderService.saveData();
+            dataLoaderService.saveData();
         }
+
+        dataLoaderService.saveData();
 
         return removed;
     }

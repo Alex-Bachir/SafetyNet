@@ -43,6 +43,9 @@ public class MedicalRecordService {
                     return medicalRecordList;
                 });
         medicalRecords.add(medicalRecord);
+
+        dataLoaderService.saveData();
+
         return medicalRecord;
 
     }
@@ -70,7 +73,7 @@ public class MedicalRecordService {
                         existingRecord.setAllergies(updatedRecord.getAllergies());
                     }
 
-//                    dataLoaderService.saveData();
+                    dataLoaderService.saveData();
                     return existingRecord;
                 });
     }
@@ -97,6 +100,8 @@ public class MedicalRecordService {
         } else {
             log.warn("Aucun dossier médical trouvé pour {} {}", firstName, lastName);
         }
+
+        dataLoaderService.saveData();
 
         return removed;
     }

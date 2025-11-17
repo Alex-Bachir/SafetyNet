@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -39,6 +40,17 @@ public class DataLoaderService {
         } catch (IOException e) {
             log.error("Erreur lors du chargement du fichier JSON", e);
             throw new RuntimeException("Impossible de charger les données", e);
+        }
+    }
+
+    public void saveData() {
+        try {
+            objectMapper.writerWithDefaultPrettyPrinter()
+                    .writeValue(new File("data.json"), safetyNetData);
+            System.out.println("✅ Données sauvegardées dans le fichier JSON");
+        } catch (IOException e) {
+            System.err.println("❌ Erreur lors de la sauvegarde : " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
