@@ -47,9 +47,9 @@ public class DataLoaderService {
         try {
             objectMapper.writerWithDefaultPrettyPrinter()
                     .writeValue(new File("data.json"), safetyNetData);
-            System.out.println("✅ Données sauvegardées dans le fichier JSON");
+            System.out.println("Données sauvegardées dans le fichier JSON");
         } catch (IOException e) {
-            System.err.println("❌ Erreur lors de la sauvegarde : " + e.getMessage());
+            System.err.println("Erreur lors de la sauvegarde : " + e.getMessage());
             e.printStackTrace();
         }
     }
