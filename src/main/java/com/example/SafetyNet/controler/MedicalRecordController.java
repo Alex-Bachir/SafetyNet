@@ -27,18 +27,40 @@ public class MedicalRecordController {
         return  medicalRecordService.getAllMedicalRecords();
     }
 
-    @GetMapping("/{firstName}/{lastName}/{birthDate}")
-    public ResponseEntity<Optional<MedicalRecord>> getMedicalRecord(@PathVariable String firstName, @PathVariable String lastName, @PathVariable String birthDate, @PathVariable List<String> medications, @PathVariable List<String> allergies, @RequestBody MedicalRecord medicalRecord) {
-        try {
-            Optional<MedicalRecord> getMedicRec = medicalRecordService.updateMedicalRecord(firstName, lastName, birthDate, medications, allergies);
-            return ResponseEntity.ok(getMedicRec);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping("/{firstName}/{lastName}")
+    public ResponseEntity<MedicalRecord> getMedicalRecordByName(
+            @PathVariable String firstName,
+            @PathVariable String lastName) {  // ← Seulement 2 paramètres, PAS de @RequestBody !
+
+        log.info("Requête GET reçue pour {} {}", firstName, lastName);
+        Optional<MedicalRecord> medicalRecord = medicalRecordService.findByName(firstName, lastName);
+
+        return medicalRecord
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
-    @DeleteMapping("/{firstName}/{lastName}/{birthDate}")
-    public ResponseEntity<MedicalRecord> deleteMedicalRecord(@PathVariable String firstName, @PathVariable String lastName, @PathVariable String birthDate, @PathVariable List<String> medications, @PathVariable List<String> allergies) {
-        boolean deleted = medicalRecordService.deleteMedicalRecord(firstName, lastName, birthDate, medications, allergies);
+
+    @PutMapping("/{firstName}/{lastName}")
+    public ResponseEntity<MedicalRecord> updateMedicalRecord(
+            @PathVariable String firstName,
+            @PathVariable String lastName,
+            @RequestBody MedicalRecord updatedRecord) {
+
+        log.info("Requête PUT reçue pour mettre à jour {} {}", firstName, lastName);
+
+        Optional<MedicalRecord> updated = medicalRecordService.updateMedicalRecord(
+                firstName,      // ← Depuis l'URL
+                lastName,       // ← Depuis l'URL
+                updatedRecord   // ← Depuis le JSON
+        );
+
+        return updated
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+    @DeleteMapping("/{firstName}/{lastName}")
+    public ResponseEntity<MedicalRecord> deleteMedicalRecord(@PathVariable String firstName, @PathVariable String lastName, @PathVariable List<String> medications, @PathVariable List<String> allergies) {
+        boolean deleted = medicalRecordService.deleteMedicalRecord(firstName, lastName, medications, allergies);
         return deleted ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 

@@ -49,11 +49,8 @@ public class MedicalRecordService {
 
     // ------------------------------- UPDATE -----------------------------------//
 
-    public Optional<MedicalRecord> updateMedicalRecord(String firstName,
-                                                       String lastName,
-                                                       String birthDate,
-                                                       List<String> medications,
-                                                       List<String> allergies) {
+    public Optional<MedicalRecord> updateMedicalRecord(String firstName, String lastName, MedicalRecord updatedRecord) {
+
         List<MedicalRecord> medicalRecords = Optional.ofNullable(dataLoaderService.getData().getMedicalrecords())
                 .orElse(Collections.emptyList());
 
@@ -62,15 +59,17 @@ public class MedicalRecordService {
                         && mr.getLastName().equalsIgnoreCase(lastName))
                 .findFirst()
                 .map(existingRecord -> {
-                    if (birthDate != null) {
-                        existingRecord.setBirthDate(birthDate);
+                    // Mise à jour uniquement des champs non null
+                    if (updatedRecord.getBirthDate() != null) {
+                        existingRecord.setBirthDate(updatedRecord.getBirthDate());
                     }
-                    if (medications != null) {
-                        existingRecord.setMedication(medications);
+                    if (updatedRecord.getMedication() != null) {
+                        existingRecord.setMedication(updatedRecord.getMedication());
                     }
-                    if (allergies != null) {
-                        existingRecord.setAllergies(allergies);
+                    if (updatedRecord.getAllergies() != null) {
+                        existingRecord.setAllergies(updatedRecord.getAllergies());
                     }
+
 //                    dataLoaderService.saveData();
                     return existingRecord;
                 });
@@ -78,7 +77,7 @@ public class MedicalRecordService {
 
     // -------------------------------- DELETE ---------------------------------- //
 
-    public boolean deleteMedicalRecord(String firstName, String lastName, String birthDate, List<String> medications, List<String> allergies) {
+    public boolean deleteMedicalRecord(String firstName, String lastName, List<String> medications, List<String> allergies) {
         log.info("Suppression du dossier médical pour {} {}", firstName, lastName);
 
 
