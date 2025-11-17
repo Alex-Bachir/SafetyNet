@@ -2,6 +2,7 @@ package com.example.SafetyNet.service;
 
 import com.example.SafetyNet.model.FireStation;
 import com.example.SafetyNet.model.Person;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +12,18 @@ import java.util.stream.Collectors;
 import static java.util.Arrays.stream;
 
 @Service
+@Slf4j
 public class FireStationService {
 
     private final DataLoaderService dataLoaderService;
 
     public FireStationService(DataLoaderService dataLoaderService) {
+
         this.dataLoaderService = dataLoaderService;
     }
 
     public List<FireStation> getAllFireStations() {
+
         return dataLoaderService.getData().getFirestations();
     }
 

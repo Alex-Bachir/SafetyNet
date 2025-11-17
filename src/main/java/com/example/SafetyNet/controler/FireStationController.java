@@ -26,8 +26,8 @@ public class FireStationController {
     @GetMapping("/{address}/{station}")
     public ResponseEntity<FireStation> getFireStationByadress(@PathVariable String address, @PathVariable Integer station, @RequestBody FireStation fireStation) {
         try {
-            FireStation updated = fireStationService.updateFireStation(address, station, fireStation);
-            return ResponseEntity.ok(updated);
+            FireStation getget = fireStationService.updateFireStation(address, station, fireStation);
+            return ResponseEntity.ok(getget);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.notFound().build();
         }
