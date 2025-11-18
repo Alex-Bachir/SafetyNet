@@ -1,5 +1,6 @@
 package com.example.SafetyNet.service;
 
+import com.example.SafetyNet.dto.PersonEmailDto;
 import com.example.SafetyNet.model.Person;
 import org.springframework.stereotype.Service;
 
@@ -93,5 +94,16 @@ public class PersonService {
 
     public long countPersons() {
         return dataLoaderService.getData().getPersons().size();
+    }
+
+    // --------------------------- COMUNITY EVENT ------------------------------------//
+
+    public List<PersonEmailDto> getEmailsByCity(String city) {
+        List<Person> allPersons = dataLoaderService.getData().getPersons();
+
+        return  allPersons.stream()
+                .filter(person -> person.getCity().equalsIgnoreCase(city))
+                .map(person -> new PersonEmailDto(person.getEmail()))
+                .collect(Collectors.toList());
     }
 }
