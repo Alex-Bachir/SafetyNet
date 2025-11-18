@@ -94,10 +94,10 @@ public class FireStationService {
         return removed;
     }
 
-    public long countFireStations() {
-        List<FireStation> fireStations = dataLoaderService.getData().getFirestations();
-        return fireStations != null ? fireStations.size() : 0;
-    }
+//    public long countFireStations() {
+//        List<FireStation> fireStations = dataLoaderService.getData().getFirestations();
+//        return fireStations != null ? fireStations.size() : 0;
+//    }
 
 }
 
