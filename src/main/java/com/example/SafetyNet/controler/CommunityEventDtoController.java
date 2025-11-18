@@ -2,6 +2,7 @@ package com.example.SafetyNet.controler;
 
 import com.example.SafetyNet.dto.PersonEmailDto;
 import com.example.SafetyNet.service.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,9 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/communityEmails")
+@RequestMapping("/communityEmail")
 public class CommunityEventDtoController {
 
+    @Autowired
     private PersonService personService;
 
     @GetMapping

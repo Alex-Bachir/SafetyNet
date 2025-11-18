@@ -2,6 +2,7 @@ package com.example.SafetyNet.service;
 
 import com.example.SafetyNet.dto.PersonEmailDto;
 import com.example.SafetyNet.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 @Service
 public class PersonService {
 
-
+    @Autowired
     private final DataLoaderService dataLoaderService;
 
     public PersonService(DataLoaderService dataLoaderService) {
@@ -96,7 +97,7 @@ public class PersonService {
         return dataLoaderService.getData().getPersons().size();
     }
 
-    // --------------------------- COMUNITY EVENT ------------------------------------//
+    // --------------------------- COMMUNITY EVENT ------------------------------------//
 
     public List<PersonEmailDto> getEmailsByCity(String city) {
         List<Person> allPersons = dataLoaderService.getData().getPersons();
